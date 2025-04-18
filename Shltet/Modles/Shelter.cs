@@ -1,4 +1,8 @@
-﻿namespace Shltet.Modles
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Shelter.Models;
+using System.Text.Json.Serialization;
+
+namespace Shltet.Modles
 {
     public class Shelter
     {
@@ -8,15 +12,18 @@
         public string? ContactEmail { get; set; }
         public string? Phone { get; set; }
         public string? Description { get; set; }
-        public ShelterStatus? Status { get; set; }
-        //public ICollection<ApplicationUser>? StaffMembers { get; set; }
-        //public ICollection<Pet>? Pets { get; set; }
-    }
-    public enum ShelterStatus
-    {
-        Pending,
-        Approved,
-        Rejected
+
+        // Suggestion (Optional): Navigation properties for easier queries
+        [JsonIgnore]
+        [ValidateNever]
+        public ICollection<Pet>? Pets { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
+        public ICollection<PetCategory>? Categories { get; set; }
+        public ICollection<SupportRequest>? SupportRequests { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
+        public ICollection<AdoptionRequest>? AdoptionRequests { get; set; }
     }
 
 }

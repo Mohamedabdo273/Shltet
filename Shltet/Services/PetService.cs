@@ -13,14 +13,15 @@ namespace Shltet.Services
             _petRepo = petRepo;
         }
 
-        public async Task<IEnumerable<Pet>> GetAllPetsAsync()
+        public async Task<IEnumerable<Pet>> GetAllPetsAsync(int shelterId)
         {
-            return await _petRepo.GetAsync();
+            return await _petRepo.GetAsync(expression: e => e.ShelterAccountId == shelterId);
         }
+
 
         public async Task<Pet?> GetPetByIdAsync(int id)
         {
-            return await _petRepo.GetOneAsync(expression: p => p.Id == id);
+            return await _petRepo.GetOneAsync([e => e.PetCategory], expression: p => p.Id == id);
         }
 
         public async Task CreatePetAsync(Pet pet)

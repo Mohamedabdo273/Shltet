@@ -13,9 +13,9 @@ namespace Shltet.Services
             _categoryRepo = categoryRepo;
         }
 
-        public async Task<IEnumerable<PetCategory>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<PetCategory>> GetAllCategoriesAsync(int shelterId)
         {
-            return await _categoryRepo.GetAsync();
+            return await _categoryRepo.GetAsync(expression:e=>e.ShelterId==shelterId);
         }
 
         public async Task<PetCategory?> GetCategoryByIdAsync(int id)

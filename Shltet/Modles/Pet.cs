@@ -1,4 +1,6 @@
-﻿using Shelter.Models;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Shelter.Models;
+using System.Text.Json.Serialization;
 
 namespace Shltet.Modles
 {
@@ -12,14 +14,19 @@ namespace Shltet.Modles
         public PetStatus Status { get; set; }
 
         public int ShelterAccountId { get; set; }
-        public ApplicationUser? ShelterAccount { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
+        public Shelter? ShelterAccount { get; set; }
 
         public int PetCategoryId { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
         public PetCategory? PetCategory { get; set; }
-
-        // Navigation
-        //public ICollection<AdoptionRequest>? AdoptionRequests { get; set; }
+        [JsonIgnore]
+        [ValidateNever]
+        public ICollection<AdoptionRequest>? AdoptionRequests { get; set; }
     }
+
     public enum PetStatus
     {
         Available,

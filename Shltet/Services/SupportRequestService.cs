@@ -13,9 +13,9 @@ namespace Shltet.Services
             _supportRepo = supportRepo;
         }
 
-        public async Task<IEnumerable<SupportRequest>> GetAllSupportRequestsAsync()
+        public async Task<IEnumerable<SupportRequest>> GetAllSupportRequestsAsync(int ShelterID)
         {
-            return await _supportRepo.GetAsync();
+            return await _supportRepo.GetAsync(expression:e=>e.ShelterId==ShelterID);
         }
 
         public async Task<SupportRequest?> GetSupportRequestByIdAsync(int id)

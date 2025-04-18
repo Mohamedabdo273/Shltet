@@ -13,9 +13,9 @@ namespace Shltet.Services
             _adoptionRepo = adoptionRepo;
         }
 
-        public async Task<IEnumerable<AdoptionRequest>> GetAllRequestsAsync()
+        public async Task<IEnumerable<AdoptionRequest>> GetAllRequestsAsync(int ShelterID)
         {
-            return await _adoptionRepo.GetAsync();
+            return await _adoptionRepo.GetAsync(expression:e=>e.ShelterId==ShelterID);
         }
 
         public async Task<AdoptionRequest?> GetRequestByIdAsync(int id)

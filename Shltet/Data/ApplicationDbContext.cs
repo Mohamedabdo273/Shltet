@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Shelter.Models;
 using Shltet.Modles;
+using System.Reflection.Emit;
 
 namespace Shltet.Data
 {
@@ -32,6 +33,20 @@ namespace Shltet.Data
                 .WithMany()
                 .HasForeignKey(m => m.ReceiverId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<PetCategory>()
+    .HasOne(p => p.Shelter)
+    .WithMany(s => s.Categories)
+    .HasForeignKey(p => p.ShelterId)
+    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Pet>()
+    .HasOne(p => p.ShelterAccount)
+    .WithMany(s => s.Pets)
+    .HasForeignKey(p => p.ShelterAccountId)
+    .OnDelete(DeleteBehavior.Restrict); // أو NoAction
+
+
         }
 
 

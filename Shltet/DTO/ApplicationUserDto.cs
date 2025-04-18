@@ -7,6 +7,7 @@ namespace Shltet.DTO
         public int Id { get; set; }
         [Required]
         public string? FullName { get; set; }
+        public int? shelterID { get; set; } = 0;
 
         [Required]
         [DataType(DataType.EmailAddress)]
